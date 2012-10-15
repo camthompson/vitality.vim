@@ -63,8 +63,8 @@ function! s:Vitality() " {{{
     let save_screen    = "\<Esc>[?1049h"
     let restore_screen = "\<Esc>[?1049l"
 
-    " These sequences tell iTerm2 to change the cursor shape to a bar or block.
-    let cursor_to_bar   = "\<Esc>]50;CursorShape=1\x7"
+    " These sequences tell iTerm2 to change the cursor shape to an underline or block.
+    let cursor_to_underline  = "\<Esc>]50;CursorShape=2\x7"
     let cursor_to_block = "\<Esc>]50;CursorShape=0\x7"
 
     if s:inside_tmux
@@ -74,7 +74,7 @@ function! s:Vitality() " {{{
         let enable_focus_reporting = s:WrapForTmux(enable_focus_reporting)
         let disable_focus_reporting = s:WrapForTmux(disable_focus_reporting)
 
-        let cursor_to_bar = s:WrapForTmux(cursor_to_bar)
+        let cursor_to_underline = s:WrapForTmux(cursor_to_underline)
         let cursor_to_block = s:WrapForTmux(cursor_to_block)
     endif
 
@@ -96,8 +96,8 @@ function! s:Vitality() " {{{
     " Insert enter/leave escapes {{{
 
     if g:vitality_fix_cursor
-        " When entering insert mode, change the cursor to a bar.
-        let &t_SI = cursor_to_bar
+        " When entering insert mode, change the cursor to a underline.
+        let &t_SI = cursor_to_underline
 
         " When exiting insert mode, change it back to a block.
         let &t_EI = cursor_to_block
